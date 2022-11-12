@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+</head>
+
+<body>
+    <button id="liveconnection">Send message to server</button>
+
+    <!-- Web Socket -->
+    <script>
+        // create websocke connection
+        const socket = new WebSocket("ws://localhost:8080/")
+
+        //connection opened
+        socket.addEventListener('open', (event) => {
+            console.log("Connected to WS server")
+            // socket.send("Started Firestore Live Data Fetching");
+        })
+
+        socket.addEventListener('message', (event) => {
+            console.log("Message from server", event.data);
+        })
+
+        const liveconnbtn = document.getElementById('liveconnection');
+
+        liveconnbtn.addEventListener('click', () => {
+            console.log("message to server sent")
+            socket.send("New Message From Client")
+        })
+
+    </script>
+
+</body>
+
+</html>
